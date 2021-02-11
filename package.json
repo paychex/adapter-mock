@@ -1,0 +1,36 @@
+{
+    "name": "@paychex/adapter-mock",
+    "version": "1.0.0",
+    "description": "A data adapter that returns mock Responses based on conditions matching Requests.",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "mocha --recursive",
+        "coverage": "c8 --reporter=html mocha --recursive",
+        "docs": "jsdoc -c jsdoc.json -R README.md"
+    },
+    "keywords": [
+        "paychex",
+        "adapter",
+        "mock",
+        "data"
+    ],
+    "license": "Apache-2.0",
+    "author": "Paychex, Inc.",
+    "contributors": [
+        {
+            "name": "Dan Barnes",
+            "email": "dbarnes1@paychex.com"
+        }
+    ],
+    "devDependencies": {
+        "docdash": "^1.2.0",
+        "expect": "^26.0.1",
+        "jsdoc": "^3.6.4",
+        "c8": "^7.3.5",
+        "mocha": "^7.1.2"
+    },
+    "dependencies": {
+        "lodash": "^4.17.11"
+    }
+}
