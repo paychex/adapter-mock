@@ -104,6 +104,19 @@ import {
     defaultsDeep,
 } from 'lodash-es';
 
+import { data as Types } from '@paychex/core/dist/esm/types.mjs';
+
+class Request extends Types.Request {}
+class Response extends Types.Response {}
+class ProxyRule extends Types.ProxyRule {}
+
+/**
+ * @async
+ * @callback Adapter
+ * @param {Request}
+ * @returns {Promise.<Response>}
+ */
+
 const DEFAULT_RESPONSE = Object.freeze({
     meta: {
         headers: {},
@@ -134,8 +147,9 @@ function asConditionPair([condition, factory]) {
  * A data adapter that returns mock Responses based on conditions matching Requests.
  *
  * @function
- * @param {Array[]} rules The rules specifying which mock Responses should be returned
+ * @param {ProxyRule[]} rules The rules specifying which mock Responses should be returned
  * based on which conditions match incoming Requests.
+ * @returns {Adapter} The adapter to register with a data pipeline.
  * @example
  * const otherwise = () => true;
  * const item = { id: 123, key: 'value' };
