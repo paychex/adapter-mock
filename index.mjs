@@ -1,4 +1,41 @@
 /**
+ * ## Importing
+ *
+ * ### esm
+ *
+ * ```js
+ * import * as Mock from '@paychex/adapter-mock';
+ * import { delay, success, failure, mock } from '@paychex/adapter-mock';
+ * ```
+ *
+ * ### cjs
+ *
+ * ```js
+ * const Mock = require('@paychex/adapter-mock');
+ * const { delay, success, failure, mock } = require('@paychex/adapter-mock');
+ * ```
+ *
+ * ### amd
+ *
+ * ```js
+ * define(['@paychex/adapter-mock'], function(Mock) { ... });
+ * define(['@paychex/adapter-mock'], function({ delay, success, failure, mock }) { ... });
+ * ```
+ *
+ * ```js
+ * require(['@paychex/adapter-mock'], function(Mock) { ... });
+ * require(['@paychex/adapter-mock'], function({ delay, success, failure, mock }) { ... });
+ * ```
+ *
+ * ### iife
+ *
+ * ```js
+ * const Mock = window['@paychex/adapter-mock'];
+ * const { delay, success, failure, mock } = window['@paychex/adapter-mock'];
+ * ```
+ *
+ * ## Usage
+ *
  * ```js
  * import {
  *   proxy,
@@ -59,11 +96,13 @@
  * @module index
  */
 
-import cond from 'lodash/cond.js';
-import constant from 'lodash/constant.js';
-import iteratee from 'lodash/iteratee.js';
-import isFunction from 'lodash/isFunction.js';
-import defaultsDeep from 'lodash/defaultsDeep.js';
+import {
+    cond,
+    constant,
+    iteratee,
+    isFunction,
+    defaultsDeep,
+} from 'lodash-es';
 
 const DEFAULT_RESPONSE = Object.freeze({
     meta: {
@@ -94,8 +133,7 @@ function asConditionPair([condition, factory]) {
 /**
  * A data adapter that returns mock Responses based on conditions matching Requests.
  *
- * @static
- * @function mock
+ * @function
  * @param {Array[]} rules The rules specifying which mock Responses should be returned
  * based on which conditions match incoming Requests.
  * @example
@@ -123,8 +161,7 @@ export function mock(rules) {
 /**
  * Returns a successful Response (status 200) with the optional specified payload.
  *
- * @static
- * @function success
+ * @function
  * @param {*} [data=null] Optional value to return in the Response data.
  * @returns {Response} A Response object that indicates a successful data call.
  * @example
@@ -146,8 +183,7 @@ export function success(data = null) {
  * Creates a failure Response instance with the specified failure HTTP status code
  * and optional data payload.
  *
- * @static
- * @function failure
+ * @function
  * @param {number} status The HTTP status code to use.
  * @param {*} [data=null] Optional value to return in the Response data.
  * @returns {Response} A Response object that indicates a failed data call.
@@ -171,8 +207,7 @@ export function failure(status, data = null) {
 /**
  * Waits the specified number of milliseconds before returning the mock Response.
  *
- * @static
- * @function delay
+ * @function
  * @param {number} ms The number of milliseconds to wait before resolving.
  * @param {Response} response The mock Response to resolve with.
  * @example

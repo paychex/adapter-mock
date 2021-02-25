@@ -9,6 +9,41 @@ is intended for use with [@paychex/core](https://github.com/paychex/core) data p
 npm install @paychex/adapter-mock
 ```
 
+## Importing
+
+### esm
+
+```js
+import * as Mock from '@paychex/adapter-mock';
+import { delay, success, failure, mock } from '@paychex/adapter-mock';
+```
+
+### cjs
+
+```js
+const Mock = require('@paychex/adapter-mock');
+const { delay, success, failure, mock } = require('@paychex/adapter-mock');
+```
+
+### amd
+
+```js
+define(['@paychex/adapter-mock'], function(Mock) { ... });
+define(['@paychex/adapter-mock'], function({ delay, success, failure, mock }) { ... });
+```
+
+```js
+require(['@paychex/adapter-mock'], function(Mock) { ... });
+require(['@paychex/adapter-mock'], function({ delay, success, failure, mock }) { ... });
+```
+
+### iife
+
+```js
+const Mock = window['@paychex/adapter-mock'];
+const { delay, success, failure, mock } = window['@paychex/adapter-mock'];
+```
+
 ## Usage
 
 ```js

@@ -1,6 +1,6 @@
 import expect from 'expect';
 
-import { mock, success, failure, delay } from '../index.js';
+import { mock, success, failure, delay } from '../index.mjs';
 
 describe('mock adapter', () => {
 
