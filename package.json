@@ -1,6 +1,6 @@
 {
     "name": "@paychex/adapter-mock",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "description": "A data adapter that returns mock Responses based on conditions matching Requests.",
     "main": "dist/cjs/index.js",
     "module": "dist/esm/index.js",
