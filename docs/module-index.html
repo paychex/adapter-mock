@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>index - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/paychex/core" target="_blank" class="menu-item" id="repository" >Source Code</a></h2><h3>Classes</h3><ul><li><a href="MockRule.html">MockRule</a></li></ul><h3>Modules</h3><ul><li><a href="module-index.html">index</a><ul class='methods'><li data-type='method'><a href="module-index.html#.delay">delay</a></li><li data-type='method'><a href="module-index.html#.failure">failure</a></li><li data-type='method'><a href="module-index.html#.mock">mock</a></li><li data-type='method'><a href="module-index.html#.success">success</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">index</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description usertext"><h2>Importing</h2>
+<h3>esm</h3>
+<pre class="prettyprint source lang-js"><code>import * as Mock from '@paychex/adapter-mock';
+import { delay, success, failure, mock } from '@paychex/adapter-mock';
+</code></pre>
+<h3>cjs</h3>
+<pre class="prettyprint source lang-js"><code>const Mock = require('@paychex/adapter-mock');
+const { delay, success, failure, mock } = require('@paychex/adapter-mock');
+</code></pre>
+<h3>amd</h3>
+<pre class="prettyprint source lang-js"><code>define(['@paychex/adapter-mock'], function(Mock) { ... });
+define(['@paychex/adapter-mock'], function({ delay, success, failure, mock }) { ... });
+</code></pre>
+<pre class="prettyprint source lang-js"><code>require(['@paychex/adapter-mock'], function(Mock) { ... });
+require(['@paychex/adapter-mock'], function({ delay, success, failure, mock }) { ... });
+</code></pre>
+<h3>iife</h3>
+<pre class="prettyprint source lang-js"><code>const Mock = window['@paychex/adapter-mock'];
+const { delay, success, failure, mock } = window['@paychex/adapter-mock'];
+</code></pre>
+<h2>Usage</h2>
+<pre class="prettyprint source lang-js"><code>import {
+  proxy,
+  fetch,
+  setAdapter,
+  createRequest,
+} from '~/path/to/datalayer';
+
+// --- the code below can be removed when real endpoints exist --- //
+
+import {
+  delay,
+  success,
+  failure,
+  mock,
+} from '@paychex/adapter-mock';
+
+const otherwise = () => true;
+const item = { id: 123, key: 'value' };
+const items = [item];
+
+setAdapter('mock-endpoint', mock([
+  [ { path: '/items' },      delay(20, success(items)) ],
+  [ { path: '/items/123' },  delay(50, success(item)) ],
+  [ otherwise,               failure(404) ];
+]));
+
+proxy.use({
+  adapter: 'mock-endpoint',
+  match: {
+    base: 'my-endpoint'
+  }
+});
+
+// --- the code below stays the same --- //
+
+proxy.use({
+  protocol: 'https',
+  host: process.env.MY_ENDPOINT_HOST,
+  match: {
+    base: 'my-endpoint',
+  }
+});
+
+const operation = {
+  method: 'GET',
+  path: '/items',
+  base: 'my-endpoint',
+};
+
+export async function loadItems() {
+  const request = createRequest(operation);
+  const response = await fetch(request);
+  return response.data; // [ { id: 123, key: 'value' } ]
+}
+</code></pre></div>
+            
+
+            
+                
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.mjs.html">index.mjs</a>, <a href="index.mjs.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".delay"><span class="type-signature">(static) </span>delay<span class="signature">(ms, response)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.mjs.html">index.mjs</a>, <a href="index.mjs.html#line224">line 224</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Waits the specified number of milliseconds before returning the mock Response.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const adapter = mock([  [{ method: 'GET', path: '/' }, delay(200, success({ ... }))],  [{ method: 'GET', path: '/timeout' }, delay(60000, failure(0))],  [{ method: 'GET', path: '/not-found' }, delay(100, failure(404))],]);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ms</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The number of milliseconds to wait before resolving.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Response</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The mock Response to resolve with.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".failure"><span class="type-signature">(static) </span>failure<span class="signature">(status, data<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Response}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.mjs.html">index.mjs</a>, <a href="index.mjs.html#line202">line 202</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Creates a failure Response instance with the specified failure HTTP status code
+and optional data payload.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const otherwise = () => true;const payload = { id: 123, key: 'value' };const adapter = mock([  [{ path: '/items/123' }, success(payload)],  [otherwise, failure(404)],]);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>status</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The HTTP status code to use.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>null</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>Optional value to return in the Response data.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Response object that indicates a failed data call.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Response</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".mock"><span class="type-signature">(static) </span>mock<span class="signature">(rules)</span><span class="type-signature"> &rarr; {Adapter}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.mjs.html">index.mjs</a>, <a href="index.mjs.html#line161">line 161</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>A data adapter that returns mock Responses based on conditions matching Requests.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const otherwise = () => true;const item = { id: 123, key: 'value' };const items = [item];dataLayer.setAdapter('mock-endpoint', mock([  [ { path: '/items' }, delay(20, success(items)) ],  [ ['path', '/items/123'], delay(50, success(item)) ],  [ otherwise, failure(404) ];]));proxy.use({  adapter: 'mock-endpoint',  match: {    base: 'my-endpoint'  }});</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>rules</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="MockRule.html">MockRule</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The rules specifying which mock Responses should be returned
+based on which conditions match incoming Requests.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The adapter to register with a data pipeline.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Adapter</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".success"><span class="type-signature">(static) </span>success<span class="signature">(data<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Response}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.mjs.html">index.mjs</a>, <a href="index.mjs.html#line178">line 178</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Returns a successful Response (status 200) with the optional specified payload.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const payload = [];const adapter = mock([  [{ path: '/items' }, success(payload)],  [{ path: '/not-found' }, failure(404)],]);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>null</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>Optional value to return in the Response data.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A Response object that indicates a successful data call.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Response</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Wed Mar 17 2021 11:25:46 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>
