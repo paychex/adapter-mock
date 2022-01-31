@@ -1,170 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    
-    <meta charset="utf-8">
-    <title>Home - Documentation</title>
-    
-    
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
-    <script src="scripts/nav.js" defer></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
-
-<label for="nav-trigger" class="overlay"></label>
-
-<nav >
-    
-    <input type="text" id="nav-search" placeholder="Search" />
-    
-    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/paychex/adapter-mock" target="_blank" class="menu-item" id="repository" >Source Code</a></h2><h3>Classes</h3><ul><li><a href="MockRule.html">MockRule</a></li></ul><h3>Modules</h3><ul><li><a href="module-index.html">index</a><ul class='methods'><li data-type='method'><a href="module-index.html#.delay">delay</a></li><li data-type='method'><a href="module-index.html#.failure">failure</a></li><li data-type='method'><a href="module-index.html#.mock">mock</a></li><li data-type='method'><a href="module-index.html#.success">success</a></li></ul></li></ul>
-</nav>
-
-<div id="main">
-    
-
-    
-
-
-
-    
-
-
-    <section class="package">
-        <h3> </h3>		
-    </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    <section class="readme usertext">
-        <article><h1>@paychex/adapter-mock</h1>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@paychex/adapter-mock</title><meta name="description" content="Documentation for @paychex/adapter-mock"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@paychex/adapter-mock</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>@paychex/adapter-mock</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#paychexadapter-mock" id="paychexadapter-mock" style="color: inherit; text-decoration: none;">
+  <h1>@paychex/adapter-mock</h1>
+</a>
 <p>A data adapter that returns mock Responses based on conditions matching Requests. This package
 is intended for use with <a href="https://github.com/paychex/core">@paychex/core</a> data pipelines.</p>
-<h2>Installation</h2>
-<pre class="prettyprint source lang-bash"><code>npm install @paychex/adapter-mock
+
+<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+  <h2>Installation</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-1">npm install @paychex/adapter-mock</span>
 </code></pre>
-<h2>Importing</h2>
-<h3>esm</h3>
-<pre class="prettyprint source lang-js"><code>import * as Mock from '@paychex/adapter-mock';
-import { delay, success, failure, mock } from '@paychex/adapter-mock';
+
+<a href="#importing" id="importing" style="color: inherit; text-decoration: none;">
+  <h2>Importing</h2>
+</a>
+
+<a href="#esm" id="esm" style="color: inherit; text-decoration: none;">
+  <h3>esm</h3>
+</a>
+<pre><code class="language-js"><span class="hl-0">import</span><span class="hl-1"> </span><span class="hl-2">*</span><span class="hl-1"> </span><span class="hl-0">as</span><span class="hl-1"> </span><span class="hl-3">Mock</span><span class="hl-1"> </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-4">&#39;@paychex/adapter-mock&#39;</span><span class="hl-1">;</span><br/><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-3">delay</span><span class="hl-1">, </span><span class="hl-3">success</span><span class="hl-1">, </span><span class="hl-3">failure</span><span class="hl-1">, </span><span class="hl-3">mock</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-4">&#39;@paychex/adapter-mock&#39;</span><span class="hl-1">;</span>
 </code></pre>
-<h3>cjs</h3>
-<pre class="prettyprint source lang-js"><code>const Mock = require('@paychex/adapter-mock');
-const { delay, success, failure, mock } = require('@paychex/adapter-mock');
+
+<a href="#cjs" id="cjs" style="color: inherit; text-decoration: none;">
+  <h3>cjs</h3>
+</a>
+<pre><code class="language-js"><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-5">Mock</span><span class="hl-1"> = </span><span class="hl-6">require</span><span class="hl-1">(</span><span class="hl-4">&#39;@paychex/adapter-mock&#39;</span><span class="hl-1">);</span><br/><span class="hl-2">const</span><span class="hl-1"> { </span><span class="hl-5">delay</span><span class="hl-1">, </span><span class="hl-5">success</span><span class="hl-1">, </span><span class="hl-5">failure</span><span class="hl-1">, </span><span class="hl-5">mock</span><span class="hl-1"> } = </span><span class="hl-6">require</span><span class="hl-1">(</span><span class="hl-4">&#39;@paychex/adapter-mock&#39;</span><span class="hl-1">);</span>
 </code></pre>
-<h3>amd</h3>
-<pre class="prettyprint source lang-js"><code>define(['@paychex/adapter-mock'], function(Mock) { ... });
-define(['@paychex/adapter-mock'], function({ delay, success, failure, mock }) { ... });
+
+<a href="#amd" id="amd" style="color: inherit; text-decoration: none;">
+  <h3>amd</h3>
+</a>
+<pre><code class="language-js"><span class="hl-6">define</span><span class="hl-1">([</span><span class="hl-4">&#39;@paychex/adapter-mock&#39;</span><span class="hl-1">], </span><span class="hl-2">function</span><span class="hl-1">(</span><span class="hl-3">Mock</span><span class="hl-1">) { ... });</span><br/><span class="hl-6">define</span><span class="hl-1">([</span><span class="hl-4">&#39;@paychex/adapter-mock&#39;</span><span class="hl-1">], </span><span class="hl-2">function</span><span class="hl-1">({ </span><span class="hl-3">delay</span><span class="hl-1">, </span><span class="hl-3">success</span><span class="hl-1">, </span><span class="hl-3">failure</span><span class="hl-1">, </span><span class="hl-3">mock</span><span class="hl-1"> }) { ... });</span>
 </code></pre>
-<pre class="prettyprint source lang-js"><code>require(['@paychex/adapter-mock'], function(Mock) { ... });
-require(['@paychex/adapter-mock'], function({ delay, success, failure, mock }) { ... });
+<pre><code class="language-js"><span class="hl-6">require</span><span class="hl-1">([</span><span class="hl-4">&#39;@paychex/adapter-mock&#39;</span><span class="hl-1">], </span><span class="hl-2">function</span><span class="hl-1">(</span><span class="hl-3">Mock</span><span class="hl-1">) { ... });</span><br/><span class="hl-6">require</span><span class="hl-1">([</span><span class="hl-4">&#39;@paychex/adapter-mock&#39;</span><span class="hl-1">], </span><span class="hl-2">function</span><span class="hl-1">({ </span><span class="hl-3">delay</span><span class="hl-1">, </span><span class="hl-3">success</span><span class="hl-1">, </span><span class="hl-3">failure</span><span class="hl-1">, </span><span class="hl-3">mock</span><span class="hl-1"> }) { ... });</span>
 </code></pre>
-<h3>iife</h3>
-<pre class="prettyprint source lang-js"><code>const Mock = window['@paychex/adapter-mock'];
-const { delay, success, failure, mock } = window['@paychex/adapter-mock'];
+
+<a href="#iife" id="iife" style="color: inherit; text-decoration: none;">
+  <h3>iife</h3>
+</a>
+<pre><code class="language-js"><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-5">Mock</span><span class="hl-1"> = </span><span class="hl-3">window</span><span class="hl-1">[</span><span class="hl-4">&#39;@paychex/adapter-mock&#39;</span><span class="hl-1">];</span><br/><span class="hl-2">const</span><span class="hl-1"> { </span><span class="hl-5">delay</span><span class="hl-1">, </span><span class="hl-5">success</span><span class="hl-1">, </span><span class="hl-5">failure</span><span class="hl-1">, </span><span class="hl-5">mock</span><span class="hl-1"> } = </span><span class="hl-3">window</span><span class="hl-1">[</span><span class="hl-4">&#39;@paychex/adapter-mock&#39;</span><span class="hl-1">];</span>
 </code></pre>
-<h2>Usage</h2>
-<pre class="prettyprint source lang-js"><code>import {
-  proxy,
-  fetch,
-  setAdapter,
-  createRequest,
-} from '~/path/to/datalayer';
 
-// --- the code below can be removed when real endpoints exist --- //
-
-import {
-  delay,
-  success,
-  failure,
-  mock,
-} from '@paychex/adapter-mock';
-
-const otherwise = () => true;
-const item = { id: 123, key: 'value' };
-const items = [item];
-
-setAdapter('mock-endpoint', mock([
-  [ { path: '/items' },      delay(20, success(items)) ],
-  [ { path: '/items/123' },  delay(50, success(item)) ],
-  [ otherwise,               failure(404) ];
-]));
-
-proxy.use({
-  adapter: 'mock-endpoint',
-  match: {
-    base: 'my-endpoint'
-  }
-});
-
-// --- the code below stays the same --- //
-
-proxy.use({
-  protocol: 'https',
-  host: process.env.MY_ENDPOINT_HOST,
-  match: {
-    base: 'my-endpoint',
-  }
-});
-
-const operation = {
-  method: 'GET',
-  path: '/items',
-  base: 'my-endpoint',
-};
-
-export async function loadItems() {
-  const request = createRequest(operation);
-  const response = await fetch(request);
-  return response.data; // [ { id: 123, key: 'value' } ]
-}
-</code></pre></article>
-    </section>
-
-
-
-
-
-
-    
-    
-</div>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
-</footer>
-
-<script>prettyPrint();</script>
-<script src="scripts/polyfill.js"></script>
-<script src="scripts/linenumber.js"></script>
-
-<script src="scripts/search.js" defer></script>
-
-
-
-</body>
-</html>
+<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+  <h2>Usage</h2>
+</a>
+<pre><code class="language-js"><span class="hl-0">import</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-3">proxy</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-3">fetch</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-3">setAdapter</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-3">createRequest</span><span class="hl-1">,</span><br/><span class="hl-1">} </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-4">&#39;~/path/to/datalayer&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-7">// --- the code below can be removed when real endpoints exist --- //</span><br/><br/><span class="hl-0">import</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-3">delay</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-3">success</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-3">failure</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-3">mock</span><span class="hl-1">,</span><br/><span class="hl-1">} </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-4">&#39;@paychex/adapter-mock&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-6">otherwise</span><span class="hl-1"> = () </span><span class="hl-2">=&gt;</span><span class="hl-1"> </span><span class="hl-2">true</span><span class="hl-1">;</span><br/><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-5">item</span><span class="hl-1"> = { </span><span class="hl-3">id:</span><span class="hl-1"> </span><span class="hl-8">123</span><span class="hl-1">, </span><span class="hl-3">key:</span><span class="hl-1"> </span><span class="hl-4">&#39;value&#39;</span><span class="hl-1"> };</span><br/><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-5">items</span><span class="hl-1"> = [</span><span class="hl-3">item</span><span class="hl-1">];</span><br/><br/><span class="hl-6">setAdapter</span><span class="hl-1">(</span><span class="hl-4">&#39;mock-endpoint&#39;</span><span class="hl-1">, </span><span class="hl-6">mock</span><span class="hl-1">([</span><br/><span class="hl-1">  [ { </span><span class="hl-3">path:</span><span class="hl-1"> </span><span class="hl-4">&#39;/items&#39;</span><span class="hl-1"> },      </span><span class="hl-6">delay</span><span class="hl-1">(</span><span class="hl-8">20</span><span class="hl-1">, </span><span class="hl-6">success</span><span class="hl-1">(</span><span class="hl-3">items</span><span class="hl-1">)) ],</span><br/><span class="hl-1">  [ { </span><span class="hl-3">path:</span><span class="hl-1"> </span><span class="hl-4">&#39;/items/123&#39;</span><span class="hl-1"> },  </span><span class="hl-6">delay</span><span class="hl-1">(</span><span class="hl-8">50</span><span class="hl-1">, </span><span class="hl-6">success</span><span class="hl-1">(</span><span class="hl-3">item</span><span class="hl-1">)) ],</span><br/><span class="hl-1">  [ </span><span class="hl-3">otherwise</span><span class="hl-1">,               </span><span class="hl-6">failure</span><span class="hl-1">(</span><span class="hl-8">404</span><span class="hl-1">) ];</span><br/><span class="hl-1">]));</span><br/><br/><span class="hl-3">proxy</span><span class="hl-1">.</span><span class="hl-6">use</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-3">adapter:</span><span class="hl-1"> </span><span class="hl-4">&#39;mock-endpoint&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-3">match:</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-3">base:</span><span class="hl-1"> </span><span class="hl-4">&#39;my-endpoint&#39;</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-7">// --- the code below stays the same --- //</span><br/><br/><span class="hl-3">proxy</span><span class="hl-1">.</span><span class="hl-6">use</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-3">protocol:</span><span class="hl-1"> </span><span class="hl-4">&#39;https&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-3">host:</span><span class="hl-1"> </span><span class="hl-3">process</span><span class="hl-1">.</span><span class="hl-3">env</span><span class="hl-1">.</span><span class="hl-5">MY_ENDPOINT_HOST</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-3">match:</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-3">base:</span><span class="hl-1"> </span><span class="hl-4">&#39;my-endpoint&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-5">operation</span><span class="hl-1"> = {</span><br/><span class="hl-1">  </span><span class="hl-3">method:</span><span class="hl-1"> </span><span class="hl-4">&#39;GET&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-3">path:</span><span class="hl-1"> </span><span class="hl-4">&#39;/items&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-3">base:</span><span class="hl-1"> </span><span class="hl-4">&#39;my-endpoint&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">};</span><br/><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-2">async</span><span class="hl-1"> </span><span class="hl-2">function</span><span class="hl-1"> </span><span class="hl-6">loadItems</span><span class="hl-1">() {</span><br/><span class="hl-1">  </span><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-5">request</span><span class="hl-1"> = </span><span class="hl-6">createRequest</span><span class="hl-1">(</span><span class="hl-3">operation</span><span class="hl-1">);</span><br/><span class="hl-1">  </span><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-5">response</span><span class="hl-1"> = </span><span class="hl-0">await</span><span class="hl-1"> </span><span class="hl-6">fetch</span><span class="hl-1">(</span><span class="hl-3">request</span><span class="hl-1">);</span><br/><span class="hl-1">  </span><span class="hl-0">return</span><span class="hl-1"> </span><span class="hl-3">response</span><span class="hl-1">.</span><span class="hl-3">data</span><span class="hl-1">; </span><span class="hl-7">// [ { id: 123, key: &#39;value&#39; } ]</span><br/><span class="hl-1">}</span>
+</code></pre>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-interface tsd-is-external"><a href="interfaces/Adapter.html" class="tsd-kind-icon">Adapter</a></li><li class="tsd-kind-interface"><a href="interfaces/ResponseFactory.html" class="tsd-kind-icon">Response<wbr/>Factory</a></li><li class="tsd-kind-type-alias"><a href="modules.html#ConditionResult" class="tsd-kind-icon">Condition<wbr/>Result</a></li><li class="tsd-kind-type-alias"><a href="modules.html#MockRule" class="tsd-kind-icon">Mock<wbr/>Rule</a></li><li class="tsd-kind-function"><a href="modules.html#delay" class="tsd-kind-icon">delay</a></li><li class="tsd-kind-function"><a href="modules.html#failure" class="tsd-kind-icon">failure</a></li><li class="tsd-kind-function"><a href="modules.html#mock" class="tsd-kind-icon">mock</a></li><li class="tsd-kind-function"><a href="modules.html#success" class="tsd-kind-icon">success</a></li></ul></nav></div></div></div><footer class=""><div class="container"><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="overlay"></div><script src="assets/main.js"></script></body></html>

@@ -1,6 +1,6 @@
-import expect from 'expect';
+import * as expect from 'expect';
 
-import { mock, success, failure, delay } from '../index.mjs';
+import { mock, success, failure, delay } from '../index';
 
 describe('mock adapter', () => {
 
@@ -106,7 +106,7 @@ describe('mock adapter', () => {
             const fn = delay(ms);
             const start = Date.now();
             await fn();
-            expect(Date.now()).not.toBeLessThan(start + ms);
+            expect(Date.now()).not.toBeLessThan(start + ms / 2);
         });
 
         it('defaults to a generic success response', async () => {
@@ -120,7 +120,7 @@ describe('mock adapter', () => {
         it('uses the provided response', async () => {
             const payload = failure(404);
             const response = await delay(0, payload)();
-            expect(response).toMatchObject(payload);
+            expect(response).toMatchObject(payload as any);
         });
 
     });

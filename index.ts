@@ -1,50 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    
-    <meta charset="utf-8">
-    <title>index.mjs - Documentation</title>
-    
-    
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
-    <script src="scripts/nav.js" defer></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
-
-<label for="nav-trigger" class="overlay"></label>
-
-<nav >
-    
-    <input type="text" id="nav-search" placeholder="Search" />
-    
-    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/paychex/adapter-mock" target="_blank" class="menu-item" id="repository" >Source Code</a></h2><h3>Classes</h3><ul><li><a href="MockRule.html">MockRule</a></li></ul><h3>Modules</h3><ul><li><a href="module-index.html">index</a><ul class='methods'><li data-type='method'><a href="module-index.html#.delay">delay</a></li><li data-type='method'><a href="module-index.html#.failure">failure</a></li><li data-type='method'><a href="module-index.html#.mock">mock</a></li><li data-type='method'><a href="module-index.html#.success">success</a></li></ul></li></ul>
-</nav>
-
-<div id="main">
-    
-    <h1 class="page-title">index.mjs</h1>
-    
-
-    
-
-
-
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
+/**
  * ## Importing
  *
  * ### esm
@@ -139,7 +93,7 @@
  * }
  * ```
  *
- * @module index
+ * @module main
  */
 
 import {
@@ -148,12 +102,21 @@ import {
     iteratee,
     isFunction,
     defaultsDeep,
-} from 'lodash-es';
+    CondPair,
+} from 'lodash';
 
-import '@paychex/core/types/data.mjs';
-import './types/index.mjs';
+import type { Response, Adapter } from '@paychex/core/types/data';
 
-const DEFAULT_RESPONSE = Object.freeze({
+export type { Adapter };
+
+export interface ResponseFactory {
+    (): Promise<Response>
+}
+
+export type ConditionResult = Response | Promise<Response> | ResponseFactory;
+export type MockRule = [any, any];
+
+const DEFAULT_RESPONSE: Response = Object.freeze({
     meta: {
         headers: {},
         messages: [],
@@ -166,13 +129,17 @@ const DEFAULT_RESPONSE = Object.freeze({
     statusText: 'Unknown',
 });
 
-function resolver(factory) {
+function resolver(factory: Response): ResponseFactory;
+function resolver(factory: Promise<Response>): ResponseFactory;
+function resolver(factory: ResponseFactory): ResponseFactory;
+
+function resolver(factory: any): ResponseFactory {
     if (!isFunction(factory))
         factory = constant(factory);
     return () => Promise.resolve().then(factory);
 }
 
-function asConditionPair([condition, factory]) {
+function asConditionPair([condition, factory]: MockRule): CondPair<any, Promise<Response>> {
     return [
         iteratee(condition),
         resolver(factory),
@@ -182,11 +149,11 @@ function asConditionPair([condition, factory]) {
 /**
  * A data adapter that returns mock Responses based on conditions matching Requests.
  *
- * @function
- * @param {MockRule[]} rules The rules specifying which mock Responses should be returned
+ * @param rules The rules specifying which mock Responses should be returned
  * based on which conditions match incoming Requests.
- * @returns {Adapter} The adapter to register with a data pipeline.
+ * @returns The adapter to register with a data pipeline.
  * @example
+ * ```js
  * const otherwise = () => true;
  * const item = { id: 123, key: 'value' };
  * const items = [item];
@@ -203,25 +170,27 @@ function asConditionPair([condition, factory]) {
  *     base: 'my-endpoint'
  *   }
  * });
+ * ```
  */
-export function mock(rules) {
+export function mock(rules: MockRule[]): Adapter {
     return cond(rules.map(asConditionPair));
 }
 
 /**
  * Returns a successful Response (status 200) with the optional specified payload.
  *
- * @function
- * @param {*} [data=null] Optional value to return in the Response data.
- * @returns {Response} A Response object that indicates a successful data call.
+ * @param data Optional value to return in the Response data.
+ * @returns A Response object that indicates a successful data call.
  * @example
+ * ```js
  * const payload = [];
  * const adapter = mock([
  *   [{ path: '/items' }, success(payload)],
  *   [{ path: '/not-found' }, failure(404)],
  * ]);
+ * ```
  */
-export function success(data = null) {
+export function success(data: any = null): Response {
     return defaultsDeep({
         data,
         status: 200,
@@ -233,9 +202,8 @@ export function success(data = null) {
  * Creates a failure Response instance with the specified failure HTTP status code
  * and optional data payload.
  *
- * @function
- * @param {number} status The HTTP status code to use.
- * @param {*} [data=null] Optional value to return in the Response data.
+ * @param status The HTTP status code to use.
+ * @param data Optional value to return in the Response data.
  * @returns {Response} A Response object that indicates a failed data call.
  * @example
  * const otherwise = () => true;
@@ -245,7 +213,7 @@ export function success(data = null) {
  *   [otherwise, failure(404)],
  * ]);
  */
-export function failure(status, data = null) {
+export function failure(status: number, data: any = null): Response {
     return defaultsDeep({
         data,
         status,
@@ -257,44 +225,19 @@ export function failure(status, data = null) {
 /**
  * Waits the specified number of milliseconds before returning the mock Response.
  *
- * @function
- * @param {number} ms The number of milliseconds to wait before resolving.
- * @param {Response} response The mock Response to resolve with.
+ * @param ms The number of milliseconds to wait before resolving.
+ * @param response The mock Response to resolve with.
  * @example
+ * ```js
  * const adapter = mock([
  *   [{ method: 'GET', path: '/' }, delay(200, success({ ... }))],
  *   [{ method: 'GET', path: '/timeout' }, delay(60000, failure(0))],
  *   [{ method: 'GET', path: '/not-found' }, delay(100, failure(404))],
  * ]);
+ * ```
  */
-export function delay(ms = 0, response = success()) {
+export function delay(ms: number = 0, response: Response = success()) {
     return () => new Promise((resolve) => {
         setTimeout(resolve, ms, response);
     });
-}</code></pre>
-        </article>
-    </section>
-
-
-
-
-    
-    
-</div>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
-</footer>
-
-<script>prettyPrint();</script>
-<script src="scripts/polyfill.js"></script>
-<script src="scripts/linenumber.js"></script>
-
-<script src="scripts/search.js" defer></script>
-
-
-
-</body>
-</html>
+}
