@@ -102,9 +102,9 @@ import {
     iteratee,
     isFunction,
     defaultsDeep,
-    CondPair,
 } from 'lodash';
 
+import type { CondPair } from 'lodash';
 import type { Response, Adapter } from '@paychex/core/types/data';
 
 export type { Adapter };
