@@ -102,9 +102,9 @@ import {
     iteratee,
     isFunction,
     defaultsDeep,
+    CondPairUnary,
 } from 'lodash';
 
-import type { CondPair } from 'lodash';
 import type { Response, Adapter } from '@paychex/core/types/data';
 
 export type { Adapter };
@@ -139,7 +139,7 @@ function resolver(factory: any): ResponseFactory {
     return () => Promise.resolve().then(factory);
 }
 
-function asConditionPair([condition, factory]: MockRule): CondPair<any, Promise<Response>> {
+function asConditionPair([condition, factory]: MockRule): CondPairUnary<any, Promise<Response>> {
     return [
         iteratee(condition),
         resolver(factory),

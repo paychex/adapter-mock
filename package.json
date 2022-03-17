@@ -58,7 +58,7 @@
         "@rollup/plugin-commonjs": "^17.1.0",
         "@rollup/plugin-node-resolve": "^11.2.0",
         "@rollup/plugin-typescript": "^8.3.0",
-        "@types/lodash": "^4.14.178",
+        "@types/lodash": "^4.14.180",
         "@types/mocha": "^9.1.0",
         "c8": "^7.4.0",
         "expect": "^26.0.1",
