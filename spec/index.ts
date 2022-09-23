@@ -8,8 +8,8 @@ describe('mock adapter', () => {
 
         it('uses function conditions', async () => {
             const adapter = mock([
-                [(obj) => 'key' in obj, success(true)],
-                [(obj) => !('key' in obj), success(false)],
+                [(obj: {}) => 'key' in obj, success(true)],
+                [(obj: {}) => !('key' in obj), success(false)],
             ]);
             expect(await adapter({})).toMatchObject({ data: false });
             expect(await adapter({ key: 123 })).toMatchObject({ data: true });
